@@ -1,0 +1,17 @@
+.menu__title {
+  margin: 1rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  ul {
+    padding: 0;
+    li {
+      list-style-type: none;
+      margin: 1rem;
+    }
+  }
+}
