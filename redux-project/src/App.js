@@ -3,11 +3,12 @@ import "./App.css";
 
 import Login from "./components/Login/Login";
 
-import Register from "./components/Register/Register";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import Register from "./components/Register/Register";
+import Profile from "./components/Profile/Profile";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
         <Footer />

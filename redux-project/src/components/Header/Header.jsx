@@ -10,10 +10,12 @@ import {
 import { Menu } from "antd";
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authSlice";
 
 const Header = (props) => {
   const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const items = !token
     ? [
         {
@@ -48,10 +50,10 @@ const Header = (props) => {
     if (e.key !== "logout") {
       navigate(`/${e.key}`);
     } else {
+      dispatch(logout());
       setCurrent("");
       navigate(`/`);
     }
-
     setCurrent(e.key);
   };
 
