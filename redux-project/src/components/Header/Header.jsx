@@ -64,7 +64,9 @@ const Header = (props) => {
 
   useEffect(() => {
     if (token) {
-      setCurrent("products");
+      setCurrent("profile");
+    } else {
+      setCurrent("");
     }
   }, [token]);
   return (
