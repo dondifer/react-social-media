@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Input, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { register, reset } from "../../features/auth/authSlice";
+import { notification } from "antd";
 const { Option } = Select;
 
 // import { useState } from "react";
@@ -7,16 +11,44 @@ const { Option } = Select;
 const Register = () => {
   let navigate = useNavigate();
 
-  const onFinish = (values) => {
-    const user = {
-      name: values.nickname,
-      email: values.email,
-      password: values.password,
-      age: values.age,
-    };
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    age: "",
+    role: "user",
+  });
 
-    console.log("Success:", values);
+  const dispatch = useDispatch();
+
+  const { isSuccess, isError, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isSuccess) {
+      notification.success({
+        message: "Success",
+        description: message,
+      });
+    }
+    if (isError) {
+      notification.error({ message: "Error", description: message });
+    }
+    dispatch(reset());
+  }, [isSuccess, isError, message]);
+
+  const onChange = (e) => {
+    const name = e.target.id.split("_")[1];
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: e.target.value,
+    }));
   };
+
+  const onFinish = (values) => {
+    dispatch(register(formData));
+    console.log("Success:", formData);
+  };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -60,6 +92,7 @@ const Register = () => {
                 message: "Please input your E-mail!",
               },
             ]}
+            onChange={onChange}
           >
             <Input />
           </Form.Item>
@@ -74,6 +107,7 @@ const Register = () => {
               },
             ]}
             hasFeedback
+            onChange={onChange}
           >
             <Input.Password />
           </Form.Item>
@@ -104,8 +138,8 @@ const Register = () => {
           </Form.Item>
 
           <Form.Item
-            name="nickname"
-            label="Nickname"
+            name="name"
+            label="name"
             tooltip="What do you want others to call you?"
             rules={[
               {
@@ -114,6 +148,7 @@ const Register = () => {
                 whitespace: true,
               },
             ]}
+            onChange={onChange}
           >
             <Input />
           </Form.Item>
@@ -128,6 +163,7 @@ const Register = () => {
                 whitespace: true,
               },
             ]}
+            onChange={onChange}
           >
             <Input />
           </Form.Item>
