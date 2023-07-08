@@ -71,14 +71,7 @@ const Register = () => {
     <div>
       <div>
         <h2>Register</h2>
-        <Form
-          name="register"
-          onFinish={onFinish}
-          style={{
-            maxWidth: 600,
-          }}
-          scrollToFirstError
-        >
+        <Form name="register" onFinish={onFinish} scrollToFirstError>
           <Form.Item
             name="email"
             label="E-mail"
