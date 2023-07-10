@@ -58,7 +58,7 @@ const Header = (props) => {
   };
 
   useEffect(() => {
-    navigate("/");
+    !token ? navigate("/") : navigate("/profile");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
