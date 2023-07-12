@@ -28,23 +28,33 @@ const Posts = ({ posts, userId }) => {
         posts.map((post) => (
           <Card
             style={{ width: "90%" }}
-            actions={[
-              <EyeOutlined
-                key="view"
-                title="view"
-                onClick={() => viewPost(post)}
-              />,
-              <EditOutlined
-                key="edit"
-                title="edit"
-                onClick={() => editPost(post)}
-              />,
-              <CloseOutlined
-                key="delete"
-                title="delete"
-                onClick={() => deletePost(post)}
-              />,
-            ]}
+            actions={
+              post.userId === userId ? (
+                [
+                  <EyeOutlined
+                    key="view"
+                    title="view"
+                    onClick={() => viewPost(post)}
+                  />,
+                  <EditOutlined
+                    key="edit"
+                    title="edit"
+                    onClick={() => editPost(post)}
+                  />,
+                  <CloseOutlined
+                    key="delete"
+                    title="delete"
+                    onClick={() => deletePost(post)}
+                  />,
+                ]
+              ) : (
+                <EyeOutlined
+                  key="view"
+                  title="view"
+                  onClick={() => viewPost(post)}
+                />
+              )
+            }
           >
             <Meta title={post.title} description={post.description} />
             <p>

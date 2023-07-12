@@ -2,7 +2,7 @@
 import {
   LoginOutlined,
   UserAddOutlined,
-  AppstoreOutlined,
+  PlusSquareOutlined,
   ProfileOutlined,
   UnorderedListOutlined,
   LogoutOutlined,
@@ -39,6 +39,11 @@ const Header = (props) => {
           label: "Dashboard",
           key: "dashboard",
           icon: <UnorderedListOutlined />,
+        },
+        {
+          label: "New Post",
+          key: "add-new",
+          icon: <PlusSquareOutlined />,
         },
         {
           label: "Logout",
