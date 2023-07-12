@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { reset, getInfo } from "../../features/auth/authSlice";
 import { notification } from "antd";
 import { Avatar, Card, Skeleton, Switch } from "antd";
+import Posts from "../Posts/Posts";
 
 const { Meta } = Card;
 
@@ -52,6 +53,8 @@ const Profile = () => {
               Age: {user?.userInfo?.age}
             </p>
           </Card>
+          <h3>USER POSTS</h3>
+          <Posts posts={user?.posts} />
         </>
       )}
     </div>

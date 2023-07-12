@@ -1,0 +1,12 @@
+.posts_group {
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-height: 400px;
+  justify-content: space-evenly;
+  overflow: auto;
+  p {
+    text-align: start;
+  }
+}
