@@ -35,6 +35,12 @@ const Profile = () => {
               />
             </Skeleton>
           </Card>
+          <h3>USER POSTS</h3>
+          <Card style={{ marginTop: 16 }} actions={[]}>
+            <Skeleton loading={isLoading} active>
+              <Meta title="Card title" description="This is the description" />
+            </Skeleton>
+          </Card>
         </>
       ) : (
         <>
@@ -54,7 +60,7 @@ const Profile = () => {
             </p>
           </Card>
           <h3>USER POSTS</h3>
-          <Posts posts={user?.posts} />
+          <Posts userId={user?.userInfo._id} posts={user?.posts} />
         </>
       )}
     </div>
