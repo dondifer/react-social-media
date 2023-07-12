@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { reset, getInfo } from "../../features/auth/authSlice";
 import { notification } from "antd";
+import { Avatar, Card, Skeleton, Switch } from "antd";
+
+const { Meta } = Card;
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -19,9 +22,37 @@ const Profile = () => {
   return (
     <div>
       {isLoading ? (
-        <p>Todavia no ta loko.................</p>
+        <>
+          <Card style={{ width: 300, marginTop: 16 }} actions={[]}>
+            <Skeleton loading={isLoading} avatar active>
+              <Meta
+                avatar={
+                  <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+                }
+                title="Card title"
+                description="This is the description"
+              />
+            </Skeleton>
+          </Card>
+        </>
       ) : (
-        <p>Hola {user?.userInfo?.name}</p>
+        <>
+          <Card style={{ width: 300, marginTop: 16 }} actions={[]}>
+            <Meta
+              avatar={
+                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />
+              }
+              title={user?.userInfo?.name}
+              description={user?.userInfo?.email}
+            />
+            <p className="ant-card-meta-description card">
+              Role: {user?.userInfo?.role}
+            </p>
+            <p className="ant-card-meta-description card">
+              Age: {user?.userInfo?.age}
+            </p>
+          </Card>
+        </>
       )}
     </div>
   );
