@@ -27,7 +27,7 @@ const Posts = ({ posts, userId }) => {
       {posts &&
         posts.map((post) => (
           <Card
-            style={{ width: 300 }}
+            style={{ width: "90%" }}
             actions={[
               <EyeOutlined
                 key="view"
