@@ -69,7 +69,7 @@ const Posts = ({ posts, userId }) => {
                 size={"small"}
                 onClick={() => likeUnlikePost(post)}
               />{" "}
-              {post.likes.length}
+              <span>{post.likes.length}</span>
             </p>
           </Card>
         ))}
