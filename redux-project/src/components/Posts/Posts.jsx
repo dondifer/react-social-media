@@ -21,6 +21,10 @@ const deletePost = (post) => {
   console.log("TO DELETE: ", post);
 };
 
+const likeUnlikePost = (post) => {
+  console.log("TO LIKEUNLIKE: ", post);
+};
+
 const Posts = ({ posts, userId }) => {
   return (
     <div className="posts_group">
@@ -61,9 +65,9 @@ const Posts = ({ posts, userId }) => {
               <Button
                 type="primary"
                 shape="square"
-                disabled={post.userId === userId}
                 icon={<HeartOutlined />}
                 size={"small"}
+                onClick={() => likeUnlikePost(post)}
               />{" "}
               {post.likes.length}
             </p>
