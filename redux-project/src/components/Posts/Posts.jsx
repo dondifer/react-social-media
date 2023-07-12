@@ -1,9 +1,9 @@
 import React from "react";
 import {
   EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
+  EyeOutlined,
   HeartOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 
 import { Avatar, Card, Skeleton, Button } from "antd";
@@ -16,7 +16,11 @@ const Posts = ({ posts, userId }) => {
         posts.map((post) => (
           <Card
             style={{ width: 300 }}
-            actions={[<EllipsisOutlined key="details" />]}
+            actions={[
+              <EyeOutlined key="view" title="view" />,
+              <EditOutlined key="edit" title="edit" />,
+              <CloseOutlined key="delete" title="delete" />,
+            ]}
           >
             <Meta title={post.title} description={post.description} />
             <p>
