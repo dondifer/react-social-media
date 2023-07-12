@@ -9,6 +9,18 @@ import {
 import { Avatar, Card, Skeleton, Button } from "antd";
 const { Meta } = Card;
 
+const viewPost = (post) => {
+  console.log("TO VIEW: ", post);
+};
+
+const editPost = (post) => {
+  console.log("TO EDIT: ", post);
+};
+
+const deletePost = (post) => {
+  console.log("TO DELETE: ", post);
+};
+
 const Posts = ({ posts, userId }) => {
   return (
     <div className="posts_group">
@@ -17,9 +29,21 @@ const Posts = ({ posts, userId }) => {
           <Card
             style={{ width: 300 }}
             actions={[
-              <EyeOutlined key="view" title="view" />,
-              <EditOutlined key="edit" title="edit" />,
-              <CloseOutlined key="delete" title="delete" />,
+              <EyeOutlined
+                key="view"
+                title="view"
+                onClick={() => viewPost(post)}
+              />,
+              <EditOutlined
+                key="edit"
+                title="edit"
+                onClick={() => editPost(post)}
+              />,
+              <CloseOutlined
+                key="delete"
+                title="delete"
+                onClick={() => deletePost(post)}
+              />,
             ]}
           >
             <Meta title={post.title} description={post.description} />
