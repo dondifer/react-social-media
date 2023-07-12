@@ -3,8 +3,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  max-height: 400px;
+  max-height: 300px;
   justify-content: space-evenly;
+  overflow: auto;
+  scroll-behavior: smooth;
   p {
     text-align: start;
   }

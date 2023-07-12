@@ -4,7 +4,7 @@ import {
   UserAddOutlined,
   AppstoreOutlined,
   ProfileOutlined,
-  ShoppingCartOutlined,
+  UnorderedListOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
@@ -34,6 +34,11 @@ const Header = (props) => {
           label: "Profile",
           key: "profile",
           icon: <ProfileOutlined />,
+        },
+        {
+          label: "Dashboard",
+          key: "dashboard",
+          icon: <UnorderedListOutlined />,
         },
         {
           label: "Logout",
