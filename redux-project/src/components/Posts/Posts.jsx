@@ -25,39 +25,40 @@ const likeUnlikePost = (post) => {
   console.log("TO LIKEUNLIKE: ", post);
 };
 
-const Posts = ({ posts, userId }) => {
+const Posts = ({ posts, userId, isDash }) => {
   return (
-    <div className="posts_group">
+    <div className={isDash ? "posts_group-dash" : "posts_group"}>
       {posts &&
-        posts.map((post) => (
+        posts.map((post, index) => (
           <Card
+            key={index}
             style={{ width: "90%" }}
             actions={
-              post.userId === userId ? (
-                [
-                  <EyeOutlined
-                    key="view"
-                    title="view"
-                    onClick={() => viewPost(post)}
-                  />,
-                  <EditOutlined
-                    key="edit"
-                    title="edit"
-                    onClick={() => editPost(post)}
-                  />,
-                  <CloseOutlined
-                    key="delete"
-                    title="delete"
-                    onClick={() => deletePost(post)}
-                  />,
-                ]
-              ) : (
-                <EyeOutlined
-                  key="view"
-                  title="view"
-                  onClick={() => viewPost(post)}
-                />
-              )
+              post.userId === userId || post.userId._id === userId
+                ? [
+                    <EyeOutlined
+                      key="view"
+                      title="view"
+                      onClick={() => viewPost(post)}
+                    />,
+                    <EditOutlined
+                      key="edit"
+                      title="edit"
+                      onClick={() => editPost(post)}
+                    />,
+                    <CloseOutlined
+                      key="delete"
+                      title="delete"
+                      onClick={() => deletePost(post)}
+                    />,
+                  ]
+                : [
+                    <EyeOutlined
+                      key="view"
+                      title="view"
+                      onClick={() => viewPost(post)}
+                    />,
+                  ]
             }
           >
             <Meta title={post.title} description={post.description} />

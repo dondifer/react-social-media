@@ -1,13 +1,21 @@
-.posts_group {
+.posts_group,
+.posts_group-dash {
   margin: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  max-height: 300px;
   justify-content: space-evenly;
   overflow: auto;
   scroll-behavior: smooth;
   p {
     text-align: start;
   }
+}
+
+.posts_group {
+  max-height: 300px;
+}
+
+.posts_group-dash {
+  max-height: 500px;
 }
