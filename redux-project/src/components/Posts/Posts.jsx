@@ -6,7 +6,7 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 
-import { Avatar, Card, Skeleton, Button } from "antd";
+import { Card, Button } from "antd";
 const { Meta } = Card;
 
 const viewPost = (post) => {
