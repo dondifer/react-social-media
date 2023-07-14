@@ -64,7 +64,11 @@ const Posts = ({ posts, userId, isDash }) => {
             <Meta title={post.title} description={post.description} />
             <p>
               <Button
-                type="primary"
+                type={
+                  post.likes.filter((el) => userId === el.userId).length
+                    ? "secondary"
+                    : "primary"
+                }
                 shape="square"
                 icon={<HeartOutlined />}
                 size={"small"}
