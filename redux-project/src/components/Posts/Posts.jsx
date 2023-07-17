@@ -5,6 +5,7 @@ import {
   HeartOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Card, Button, Input, Form } from "antd";
 const { Meta } = Card;
@@ -18,6 +19,7 @@ const editPost = (post) => {
 };
 
 const deletePost = (post) => {
+  //TODO: make a call and modify in reducer
   console.log("TO DELETE: ", post);
 };
 
@@ -26,6 +28,8 @@ const likeUnlikePost = (post) => {
 };
 
 const Posts = ({ posts, userId, isDash }) => {
+  const dispatch = useDispatch();
+  const { isLoading, postDelete } = useSelector((state) => state.posts);
   const [formComment] = Form.useForm();
 
   const onReset = () => {

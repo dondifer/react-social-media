@@ -90,6 +90,21 @@ export const postNew = createAsyncThunk(
   }
 );
 
+export const postDelete = createAsyncThunk(
+  "posts/delete",
+  async (postId, thunkAPI) => {
+    try {
+      return await postsService.postDelete(postId);
+    } catch (error) {
+      const message =
+        error.response.data?.messages ||
+        error.response.data?.message ||
+        error.response.data;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export default postsSlice.reducer;
 
 export const { reset } = postsSlice.actions;
