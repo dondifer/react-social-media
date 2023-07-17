@@ -37,6 +37,13 @@ export const postsSlice = createSlice({
       .addCase(getAll.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(findByTitle.fulfilled, (state, action) => {
+        state.posts = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(findByTitle.pending, (state, action) => {
+        state.isLoading = true;
       });
   },
 });
@@ -52,6 +59,17 @@ export const getAll = createAsyncThunk("posts/getAll", async (thunkAPI) => {
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+export const findByTitle = createAsyncThunk(
+  "posts/findByTitle",
+  async (postName) => {
+    try {
+      return await postsService.findByTitle(postName);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 export default postsSlice.reducer;
 

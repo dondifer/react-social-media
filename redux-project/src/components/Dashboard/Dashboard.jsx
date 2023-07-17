@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../../features/posts/postsSlice";
+import { getAll, findByTitle } from "../../features/posts/postsSlice";
 import { Spin } from "antd";
 
 import { LoadingOutlined } from "@ant-design/icons";
@@ -16,7 +16,8 @@ const Dashboard = () => {
   const { posts, isLoading } = useSelector((state) => state.posts);
   const { user } = useSelector((state) => state.auth);
 
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) =>
+    value ? dispatch(findByTitle(value)) : dispatch(getAll());
 
   useEffect(() => {
     dispatch(getAll());
