@@ -6,7 +6,7 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 
-import { Card, Button } from "antd";
+import { Card, Button, Input, Form } from "antd";
 const { Meta } = Card;
 
 const viewPost = (post) => {
@@ -26,6 +26,17 @@ const likeUnlikePost = (post) => {
 };
 
 const Posts = ({ posts, userId, isDash }) => {
+  const [formComment] = Form.useForm();
+
+  const onReset = () => {
+    formComment.resetFields();
+  };
+
+  const onFinish = (value) => {
+    console.log(value);
+    onReset();
+  };
+
   return (
     <div className={isDash ? "posts_group-dash" : "posts_group"}>
       {posts &&
@@ -76,6 +87,25 @@ const Posts = ({ posts, userId, isDash }) => {
               />{" "}
               <span>{post.likes.length}</span>
             </p>
+            <Form
+              form={formComment}
+              name="control-hooks"
+              className="no-padding"
+              onFinish={onFinish}
+            >
+              <Form.Item name="comment" label="">
+                <Input placeholder="Comment..." bordered={false} />
+              </Form.Item>
+
+              <Form.Item className="button-layout">
+                <Button type="primary" htmlType="submit">
+                  Comment
+                </Button>
+                <Button htmlType="button" onClick={onReset}>
+                  Reset
+                </Button>
+              </Form.Item>
+            </Form>
           </Card>
         ))}
     </div>
