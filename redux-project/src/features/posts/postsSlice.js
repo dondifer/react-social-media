@@ -44,6 +44,10 @@ export const postsSlice = createSlice({
       })
       .addCase(findByTitle.pending, (state, action) => {
         state.isLoading = true;
+      })
+      .addCase(postNew.fulfilled, (state, action) => {
+        state.isSuccess = true;
+        state.message = "Posted!!";
       });
   },
 });
@@ -67,6 +71,21 @@ export const findByTitle = createAsyncThunk(
       return await postsService.findByTitle(postName);
     } catch (error) {
       console.error(error);
+    }
+  }
+);
+
+export const postNew = createAsyncThunk(
+  "posts/",
+  async (postData, thunkAPI) => {
+    try {
+      return await postsService.postNew(postData);
+    } catch (error) {
+      const message =
+        error.response.data?.messages ||
+        error.response.data?.message ||
+        error.response.data;
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );

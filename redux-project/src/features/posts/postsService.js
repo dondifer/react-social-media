@@ -11,9 +11,20 @@ const findByTitle = async (postTitle) => {
   return res.data;
 };
 
+const postNew = async (postData) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.post(`${API_URL}/posts`, postData, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data;
+};
+
 const postsService = {
   getAll,
   findByTitle,
+  postNew,
 };
 
 export default postsService;

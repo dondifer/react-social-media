@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { reset, postNew } from "../../features/posts/postsSlice";
+import { notification } from "antd";
 
 const AddNew = () => {
   const formRef = React.useRef(null);
   const onFinish = (values) => {
+    dispatch(postNew(values));
     console.log(values);
   };
+
+  const dispatch = useDispatch();
+
   const onReset = () => {
     formRef.current?.resetFields();
   };
+
+  const { isSuccess, isError, message } = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    if (isSuccess) {
+      notification.success({
+        message: "Success",
+        description: message,
+      });
+      onReset();
+    }
+    if (isError) {
+      notification.error({ message: "Error", description: message });
+    }
+    dispatch(reset());
+  }, [isSuccess, isError, message]);
   return (
     <div>
       <Form
