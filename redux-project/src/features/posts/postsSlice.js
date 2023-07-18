@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 import postsService from "./postsService";
 
 const token = localStorage.getItem("token")
@@ -8,46 +9,57 @@ const token = localStorage.getItem("token")
 const initialState = {
   posts: null,
   post: null,
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: "",
+  isErrorP: false,
+  isSuccessP: false,
+  isLoadingP: false,
+  messageP: "",
 };
+
+let postSelectedId = "";
 
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
     reset: (state) => {
-      state.isError = false;
-      state.isSuccess = false;
-      state.isLoading = false;
-      state.message = "";
+      state.isErrorP = false;
+      state.isSuccessP = false;
+      state.isLoadingP = false;
+      state.messageP = "";
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAll.pending, (state, action) => {
-        state.isLoading = true;
+        state.isLoadingP = true;
       })
       .addCase(getAll.fulfilled, (state, action) => {
         state.posts = action.payload;
-        state.isLoading = false;
+        state.isLoadingP = false;
       })
       .addCase(getAll.rejected, (state, action) => {
-        state.isError = true;
-        state.message = action.payload;
+        state.isErrorP = true;
+        state.messageP = action.payload;
       })
       .addCase(findByTitle.fulfilled, (state, action) => {
         state.posts = action.payload;
-        state.isLoading = false;
+        state.isLoadingP = false;
       })
       .addCase(findByTitle.pending, (state, action) => {
-        state.isLoading = true;
+        state.isLoadingP = true;
       })
       .addCase(postNew.fulfilled, (state, action) => {
-        state.isSuccess = true;
-        state.message = "Posted!!";
+        state.isSuccessP = true;
+        state.messageP = "Posted!!";
+      })
+      .addCase(postDelete.fulfilled, (state, action) => {
+        if (state.posts && postSelectedId) {
+          state.posts = [
+            ...state.posts.filter((el) => el._id !== postSelectedId),
+          ];
+        }
+
+        state.message = "Deleted!!";
       });
   },
 });
@@ -94,6 +106,7 @@ export const postDelete = createAsyncThunk(
   "posts/delete",
   async (postId, thunkAPI) => {
     try {
+      postSelectedId = postId;
       return await postsService.postDelete(postId);
     } catch (error) {
       const message =

@@ -38,11 +38,22 @@ const getInfo = async () => {
   return res.data;
 };
 
+const postDelete = async (postId) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.delete(`${API_URL}/posts/delete/${postId}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data;
+};
+
 const authService = {
   register,
   login,
   logout,
   getInfo,
+  postDelete,
 };
 
 export default authService;

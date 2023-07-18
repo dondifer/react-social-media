@@ -17,21 +17,23 @@ const AddNew = () => {
     formRef.current?.resetFields();
   };
 
-  const { isSuccess, isError, message } = useSelector((state) => state.posts);
+  const { isSuccessP, isErrorP, messageP } = useSelector(
+    (state) => state.posts
+  );
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccessP) {
       notification.success({
         message: "Success",
-        description: message,
+        description: messageP,
       });
       onReset();
     }
-    if (isError) {
-      notification.error({ message: "Error", description: message });
+    if (isErrorP) {
+      notification.error({ message: "Error", description: messageP });
     }
     dispatch(reset());
-  }, [isSuccess, isError, message]);
+  }, [isSuccessP, isErrorP, messageP]);
   return (
     <div>
       <Form

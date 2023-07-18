@@ -23,7 +23,7 @@ const postNew = async (postData) => {
 
 const postDelete = async (postId) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  const res = await axios.post(`${API_URL}/posts/delete/${postId}`, {
+  const res = await axios.delete(`${API_URL}/posts/delete/${postId}`, {
     headers: {
       authorization: token,
     },

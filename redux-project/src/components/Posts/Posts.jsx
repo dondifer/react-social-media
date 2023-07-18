@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   EditOutlined,
   EyeOutlined,
@@ -6,6 +6,9 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
+import { notification } from "antd";
+import { postDelete, reset as resetP } from "../../features/posts/postsSlice";
+import { postProfileDelete, reset } from "../../features/auth/authSlice";
 
 import { Card, Button, Input, Form } from "antd";
 const { Meta } = Card;
@@ -18,19 +21,44 @@ const editPost = (post) => {
   console.log("TO EDIT: ", post);
 };
 
-const deletePost = (post) => {
-  //TODO: make a call and modify in reducer
-  console.log("TO DELETE: ", post);
-};
-
 const likeUnlikePost = (post) => {
   console.log("TO LIKEUNLIKE: ", post);
 };
 
 const Posts = ({ posts, userId, isDash }) => {
   const dispatch = useDispatch();
-  const { isLoading, postDelete } = useSelector((state) => state.posts);
+  const { isSuccessP, isErrorP, messageP } = useSelector(
+    (state) => state.posts
+  );
+  const { isSuccess, isError, message } = useSelector((state) => state.auth);
   const [formComment] = Form.useForm();
+
+  useEffect(() => {
+    if (isSuccess || isSuccessP) {
+      notification.success({
+        message: "Success",
+        description: messageP || message,
+      });
+    }
+    if (isError || isErrorP) {
+      notification.error({
+        message: "Error",
+        description: messageP || message,
+      });
+    }
+    dispatch(reset());
+    dispatch(resetP());
+  }, [isSuccess, isError, message, isSuccessP, isErrorP, messageP, dispatch]);
+
+  const deletePost = (post) => {
+    if (isDash) {
+      dispatch(postDelete(post._id));
+    } else {
+      dispatch(postProfileDelete(post._id));
+    }
+
+    console.log("TO DELETE: ", post);
+  };
 
   const onReset = () => {
     formComment.resetFields();

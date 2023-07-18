@@ -60,7 +60,11 @@ const Profile = () => {
             </p>
           </Card>
           <h3>USER POSTS</h3>
-          <Posts userId={user?.userInfo._id} posts={user?.posts} />
+          <Posts
+            userId={user?.userInfo._id}
+            posts={user?.posts}
+            isDash={false}
+          />
         </>
       )}
     </div>
