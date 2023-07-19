@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   EditOutlined,
   EyeOutlined,
@@ -7,8 +7,13 @@ import {
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { notification } from "antd";
-import { postDelete, reset as resetP } from "../../features/posts/postsSlice";
+import {
+  postDelete,
+  reset as resetP,
+  findById,
+} from "../../features/posts/postsSlice";
 import { postProfileDelete, reset } from "../../features/auth/authSlice";
+import ShowModal from "../ShowModal/ShowModal";
 
 import { Card, Button, Input, Form } from "antd";
 const { Meta } = Card;
@@ -17,16 +22,20 @@ const viewPost = (post) => {
   console.log("TO VIEW: ", post);
 };
 
-const editPost = (post) => {
-  console.log("TO EDIT: ", post);
-};
-
 const likeUnlikePost = (post) => {
   console.log("TO LIKEUNLIKE: ", post);
 };
 
 const Posts = ({ posts, userId, isDash }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
+
+  const showModal = (post) => {
+    dispatch(findById(post._id));
+    console.log(post._id);
+    setIsModalVisible(true);
+  };
+
   const { isSuccessP, isErrorP, messageP } = useSelector(
     (state) => state.posts
   );
@@ -56,7 +65,6 @@ const Posts = ({ posts, userId, isDash }) => {
     } else {
       dispatch(postProfileDelete(post._id));
     }
-
     console.log("TO DELETE: ", post);
   };
 
@@ -87,7 +95,7 @@ const Posts = ({ posts, userId, isDash }) => {
                     <EditOutlined
                       key="edit"
                       title="edit"
-                      onClick={() => editPost(post)}
+                      onClick={() => showModal(post)}
                     />,
                     <CloseOutlined
                       key="delete"
@@ -140,6 +148,7 @@ const Posts = ({ posts, userId, isDash }) => {
             </Form>
           </Card>
         ))}
+      <ShowModal visible={isModalVisible} setVisible={setIsModalVisible} />
     </div>
   );
 };

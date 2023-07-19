@@ -31,11 +31,17 @@ const postDelete = async (postId) => {
   return res.data;
 };
 
+const findById = async (postId) => {
+  const res = await axios.get(API_URL + "/posts/findById/" + postId);
+  return res.data;
+};
+
 const postsService = {
   getAll,
   findByTitle,
   postNew,
   postDelete,
+  findById,
 };
 
 export default postsService;

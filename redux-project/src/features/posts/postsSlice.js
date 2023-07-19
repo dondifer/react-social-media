@@ -60,6 +60,9 @@ export const postsSlice = createSlice({
         }
 
         state.message = "Deleted!!";
+      })
+      .addCase(findById.fulfilled, (state, action) => {
+        state.post = action.payload.post;
       });
   },
 });
@@ -117,6 +120,14 @@ export const postDelete = createAsyncThunk(
     }
   }
 );
+
+export const findById = createAsyncThunk("posts/findById", async (id) => {
+  try {
+    return await postsService.findById(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export default postsSlice.reducer;
 
