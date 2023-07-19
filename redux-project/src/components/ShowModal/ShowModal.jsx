@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Button, Modal, Form, InputNumber, Select, Input } from "antd";
+import { Button, Modal, Form, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { update } from "../../features/posts/postsSlice";
 
 const ShowModal = (data) => {
+  const dispatch = useDispatch();
   const { post } = useSelector((state) => state.posts);
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log("Success:", values);
+    const postWithId = { ...values, id: post._id };
+    dispatch(update(postWithId));
     data.setVisible(false);
   };
 

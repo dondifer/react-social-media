@@ -63,6 +63,17 @@ export const postsSlice = createSlice({
       })
       .addCase(findById.fulfilled, (state, action) => {
         state.post = action.payload.post;
+      })
+      .addCase(update.fulfilled, (state, action) => {
+        const posts = state.posts.map((post) => {
+          if (post._id === action.payload.post._id) {
+            post = action.payload.post;
+          }
+
+          return post;
+        });
+
+        state.posts = posts;
       });
   },
 });
@@ -124,6 +135,14 @@ export const postDelete = createAsyncThunk(
 export const findById = createAsyncThunk("posts/findById", async (id) => {
   try {
     return await postsService.findById(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const update = createAsyncThunk("books/update", async (post) => {
+  try {
+    return await postsService.update(post);
   } catch (error) {
     console.error(error);
   }

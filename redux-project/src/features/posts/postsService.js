@@ -36,12 +36,23 @@ const findById = async (postId) => {
   return res.data;
 };
 
+const update = async (post) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(API_URL + "/posts/update/" + post.id, post, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data;
+};
+
 const postsService = {
   getAll,
   findByTitle,
   postNew,
   postDelete,
   findById,
+  update,
 };
 
 export default postsService;
