@@ -48,12 +48,23 @@ const postDelete = async (postId) => {
   return res.data;
 };
 
+const postUpdate = async (post) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(API_URL + "/posts/update/" + post.id, post, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data;
+};
+
 const authService = {
   register,
   login,
   logout,
   getInfo,
   postDelete,
+  postUpdate,
 };
 
 export default authService;

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { update } from "../../features/posts/postsSlice";
+import { update as updateAuth } from "../../features/auth/authSlice";
 
 const ShowModal = (data) => {
   const dispatch = useDispatch();
@@ -11,7 +12,11 @@ const ShowModal = (data) => {
   const onFinish = (values) => {
     console.log("Success:", values);
     const postWithId = { ...values, id: post._id };
-    dispatch(update(postWithId));
+    if (data.isDash) {
+      dispatch(update(postWithId));
+    } else {
+      dispatch(updateAuth(postWithId));
+    }
     data.setVisible(false);
   };
 

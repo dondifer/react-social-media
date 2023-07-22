@@ -140,7 +140,7 @@ export const findById = createAsyncThunk("posts/findById", async (id) => {
   }
 });
 
-export const update = createAsyncThunk("books/update", async (post) => {
+export const update = createAsyncThunk("posts/update", async (post) => {
   try {
     return await postsService.update(post);
   } catch (error) {

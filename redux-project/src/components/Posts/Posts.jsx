@@ -148,7 +148,11 @@ const Posts = ({ posts, userId, isDash }) => {
             </Form>
           </Card>
         ))}
-      <ShowModal visible={isModalVisible} setVisible={setIsModalVisible} />
+      <ShowModal
+        isDash={isDash}
+        visible={isModalVisible}
+        setVisible={setIsModalVisible}
+      />
     </div>
   );
 };

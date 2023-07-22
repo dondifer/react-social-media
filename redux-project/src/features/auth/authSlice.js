@@ -73,6 +73,17 @@ export const authSlice = createSlice({
       .addCase(getInfo.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(update.fulfilled, (state, action) => {
+        const posts = state.user.posts.map((post) => {
+          if (post._id === action.payload.post._id) {
+            post = action.payload.post;
+          }
+
+          return post;
+        });
+
+        state.user.posts = posts;
       });
   },
 });
@@ -147,6 +158,14 @@ export const postProfileDelete = createAsyncThunk(
     }
   }
 );
+
+export const update = createAsyncThunk("auth/update", async (post) => {
+  try {
+    return await authService.postUpdate(post);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export default authSlice.reducer;
 
