@@ -28,7 +28,7 @@ const ShowModal = (data) => {
     form.setFieldsValue(postToEdit);
   }, [post]);
 
-  const close = (values) => {
+  const close = () => {
     data.setVisible(false);
   };
 
@@ -38,30 +38,37 @@ const ShowModal = (data) => {
 
   return (
     <Modal
-      title="Edit Post"
+      title={!data.isView ? "Edit Post" : "View Post"}
       open={data.visible}
       afterClose={() => afterClose()}
       closeIcon={[]}
       footer={[]}
     >
-      <Form onFinish={onFinish} form={form}>
-        <Form.Item label="Title" name="title">
-          <Input placeholder="Title" />
-        </Form.Item>
+      {!data.isView ? (
+        <Form onFinish={onFinish} form={form}>
+          <Form.Item label="Title" name="title">
+            <Input placeholder="Title" />
+          </Form.Item>
 
-        <Form.Item label="Description" name="description">
-          <Input placeholder="Description" />
-        </Form.Item>
+          <Form.Item label="Description" name="description">
+            <Input placeholder="Description" />
+          </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Update
-          </Button>
-          <Button type="secondary" onClick={() => close()}>
-            Cancel
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Update
+            </Button>
+            <Button type="secondary" onClick={() => close()}>
+              Cancel
+            </Button>
+          </Form.Item>
+        </Form>
+      ) : (
+        <>
+          <h2>{post.title}</h2>
+          <p>{post.description}</p>
+        </>
+      )}
     </Modal>
   );
 };

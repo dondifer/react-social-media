@@ -28,12 +28,21 @@ const likeUnlikePost = (post) => {
 
 const Posts = ({ posts, userId, isDash }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const dispatch = useDispatch();
+  const [isView, setIsisView] = useState(false);
 
+  const dispatch = useDispatch();
   const showModal = (post) => {
     dispatch(findById(post._id));
-    console.log(post._id);
+    setIsisView(false);
     setIsModalVisible(true);
+  };
+
+  const viewPost = (post) => {
+    dispatch(findById(post._id));
+    setIsisView(true);
+    setIsModalVisible(true);
+
+    console.log("TO VIEW: ", post);
   };
 
   const { isSuccessP, isErrorP, messageP } = useSelector(
@@ -149,6 +158,7 @@ const Posts = ({ posts, userId, isDash }) => {
           </Card>
         ))}
       <ShowModal
+        isView={isView}
         isDash={isDash}
         visible={isModalVisible}
         setVisible={setIsModalVisible}
