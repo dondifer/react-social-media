@@ -65,8 +65,11 @@ const ShowModal = (data) => {
         </Form>
       ) : (
         <>
-          <h2>{post.title}</h2>
-          <p>{post.description}</p>
+          <h2>{post && post?.title}</h2>
+          <p>{post && post?.description}</p>
+          <Button type="secondary" onClick={() => close()}>
+            Close
+          </Button>
         </>
       )}
     </Modal>
