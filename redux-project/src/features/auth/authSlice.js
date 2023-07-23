@@ -84,6 +84,28 @@ export const authSlice = createSlice({
         });
 
         state.user.posts = posts;
+      })
+      .addCase(like.fulfilled, (state, action) => {
+        const posts = state.user.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            post = action.payload;
+          }
+
+          return post;
+        });
+
+        state.user.posts = posts;
+      })
+      .addCase(unlike.fulfilled, (state, action) => {
+        const posts = state.user.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            post = action.payload;
+          }
+
+          return post;
+        });
+
+        state.user.posts = posts;
       });
   },
 });
@@ -162,6 +184,22 @@ export const postProfileDelete = createAsyncThunk(
 export const update = createAsyncThunk("auth/update", async (post) => {
   try {
     return await authService.postUpdate(post);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const like = createAsyncThunk("auth/like", async (id) => {
+  try {
+    return await authService.like(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const unlike = createAsyncThunk("auth/unlike", async (id) => {
+  try {
+    return await authService.unlike(id);
   } catch (error) {
     console.error(error);
   }

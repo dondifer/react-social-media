@@ -58,6 +58,30 @@ const postUpdate = async (post) => {
   return res.data;
 };
 
+const like = async (id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(
+    `${API_URL}/posts/like/${id}`,
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
+
+const unlike = async (id) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.delete(`${API_URL}/posts/unlike/${id}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data;
+};
+
 const authService = {
   register,
   login,
@@ -65,6 +89,8 @@ const authService = {
   getInfo,
   postDelete,
   postUpdate,
+  like,
+  unlike,
 };
 
 export default authService;

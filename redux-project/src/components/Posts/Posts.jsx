@@ -14,15 +14,16 @@ import {
   like,
   unlike,
 } from "../../features/posts/postsSlice";
-import { postProfileDelete, reset } from "../../features/auth/authSlice";
+import {
+  postProfileDelete,
+  reset,
+  like as likeAuth,
+  unlike as unlikeAuth,
+} from "../../features/auth/authSlice";
 import ShowModal from "../ShowModal/ShowModal";
 
 import { Card, Button, Input, Form } from "antd";
 const { Meta } = Card;
-
-const viewPost = (post) => {
-  console.log("TO VIEW: ", post);
-};
 
 const Posts = ({ posts, userId, isDash }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -43,9 +44,9 @@ const Posts = ({ posts, userId, isDash }) => {
 
   const likeUnlikePost = (post) => {
     if (post.likes.filter((el) => userId === el.userId).length) {
-      dispatch(unlike(post._id));
+      isDash ? dispatch(unlike(post._id)) : dispatch(unlikeAuth(post._id));
     } else {
-      dispatch(like(post._id));
+      isDash ? dispatch(like(post._id)) : dispatch(likeAuth(post._id));
     }
   };
 
