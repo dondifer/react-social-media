@@ -108,7 +108,7 @@ export const authSlice = createSlice({
         state.user.posts = posts;
       })
       .addCase(comment.fulfilled, (state, action) => {
-        const posts = state.posts.map((post) => {
+        const posts = state.user.posts.map((post) => {
           if (post._id === action.payload._id) {
             post = action.payload;
           }
@@ -116,7 +116,7 @@ export const authSlice = createSlice({
           return post;
         });
 
-        state.posts = posts;
+        state.user.posts = posts;
       });
   },
 });
