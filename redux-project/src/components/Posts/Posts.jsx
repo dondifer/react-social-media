@@ -13,12 +13,14 @@ import {
   findById,
   like,
   unlike,
+  comment,
 } from "../../features/posts/postsSlice";
 import {
   postProfileDelete,
   reset,
   like as likeAuth,
   unlike as unlikeAuth,
+  comment as commentAuth,
 } from "../../features/auth/authSlice";
 import ShowModal from "../ShowModal/ShowModal";
 
@@ -54,6 +56,7 @@ const Posts = ({ posts, userId, isDash }) => {
     (state) => state.posts
   );
   const { isSuccess, isError, message } = useSelector((state) => state.auth);
+
   const [formComment] = Form.useForm();
 
   useEffect(() => {
@@ -86,8 +89,14 @@ const Posts = ({ posts, userId, isDash }) => {
     formComment.resetFields();
   };
 
-  const onFinish = (value) => {
-    console.log(value);
+  const onFinish = (value, index) => {
+    const postComment = {
+      id: posts[index]._id,
+      comment: formComment.getFieldsValue()[`comment-${index}`],
+    };
+    isDash
+      ? dispatch(comment(postComment))
+      : dispatch(commentAuth(postComment));
     onReset();
   };
 
@@ -142,17 +151,21 @@ const Posts = ({ posts, userId, isDash }) => {
               <span>{post.likes.length}</span>
             </p>
             <Form
+              key={index}
               form={formComment}
-              name="control-hooks"
+              name={`control-hooks${index}`}
               className="no-padding"
-              onFinish={onFinish}
             >
-              <Form.Item name="comment" label="">
+              <Form.Item name={`comment-${index}`} label="">
                 <Input placeholder="Comment..." bordered={false} />
               </Form.Item>
 
               <Form.Item className="button-layout">
-                <Button type="primary" htmlType="submit">
+                <Button
+                  onClick={() => onFinish("", index)}
+                  type="primary"
+                  htmlType="button"
+                >
                   Comment
                 </Button>
                 <Button htmlType="button" onClick={onReset}>

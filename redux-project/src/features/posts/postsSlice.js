@@ -96,6 +96,17 @@ export const postsSlice = createSlice({
         });
 
         state.posts = posts;
+      })
+      .addCase(comment.fulfilled, (state, action) => {
+        const posts = state.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            post = action.payload;
+          }
+
+          return post;
+        });
+
+        state.posts = posts;
       });
   },
 });
@@ -181,6 +192,14 @@ export const like = createAsyncThunk("posts/like", async (id) => {
 export const unlike = createAsyncThunk("posts/unlike", async (id) => {
   try {
     return await postsService.unlike(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const comment = createAsyncThunk("posts/comment", async (post) => {
+  try {
+    return await postsService.comment(post);
   } catch (error) {
     console.error(error);
   }

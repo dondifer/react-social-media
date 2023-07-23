@@ -70,6 +70,16 @@ const unlike = async (id) => {
   return res.data;
 };
 
+const comment = async (post) => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const res = await axios.put(API_URL + "/posts/comment/" + post.id, post, {
+    headers: {
+      authorization: token,
+    },
+  });
+  return res.data;
+};
+
 const postsService = {
   getAll,
   findByTitle,
@@ -79,6 +89,7 @@ const postsService = {
   update,
   like,
   unlike,
+  comment,
 };
 
 export default postsService;
