@@ -11,6 +11,8 @@ import {
   postDelete,
   reset as resetP,
   findById,
+  like,
+  unlike,
 } from "../../features/posts/postsSlice";
 import { postProfileDelete, reset } from "../../features/auth/authSlice";
 import ShowModal from "../ShowModal/ShowModal";
@@ -20,10 +22,6 @@ const { Meta } = Card;
 
 const viewPost = (post) => {
   console.log("TO VIEW: ", post);
-};
-
-const likeUnlikePost = (post) => {
-  console.log("TO LIKEUNLIKE: ", post);
 };
 
 const Posts = ({ posts, userId, isDash }) => {
@@ -41,8 +39,14 @@ const Posts = ({ posts, userId, isDash }) => {
     dispatch(findById(post._id));
     setIsisView(true);
     setIsModalVisible(true);
+  };
 
-    console.log("TO VIEW: ", post);
+  const likeUnlikePost = (post) => {
+    if (post.likes.filter((el) => userId === el.userId).length) {
+      dispatch(unlike(post._id));
+    } else {
+      dispatch(like(post._id));
+    }
   };
 
   const { isSuccessP, isErrorP, messageP } = useSelector(

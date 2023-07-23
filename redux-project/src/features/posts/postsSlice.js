@@ -65,15 +65,7 @@ export const postsSlice = createSlice({
         state.post = action.payload.post;
       })
       .addCase(update.fulfilled, (state, action) => {
-        const posts = state.posts.map((post) => {
-          if (post._id === action.payload.post._id) {
-            post = action.payload.post;
-          }
-
-          return post;
-        });
-
-        state.posts = posts;
+        console.log(action.payload);
       });
   },
 });
@@ -143,6 +135,22 @@ export const findById = createAsyncThunk("posts/findById", async (id) => {
 export const update = createAsyncThunk("posts/update", async (post) => {
   try {
     return await postsService.update(post);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const like = createAsyncThunk("posts/like", async (id) => {
+  try {
+    return await postsService.like(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const unlike = createAsyncThunk("posts/unlike", async (id) => {
+  try {
+    return await postsService.unlike(id);
   } catch (error) {
     console.error(error);
   }
