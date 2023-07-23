@@ -65,7 +65,37 @@ export const postsSlice = createSlice({
         state.post = action.payload.post;
       })
       .addCase(update.fulfilled, (state, action) => {
-        console.log(action.payload);
+        const posts = state.posts.map((post) => {
+          if (post._id === action.payload.post._id) {
+            post = action.payload.post;
+          }
+
+          return post;
+        });
+
+        state.posts = posts;
+      })
+      .addCase(like.fulfilled, (state, action) => {
+        const posts = state.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            post = action.payload;
+          }
+
+          return post;
+        });
+
+        state.posts = posts;
+      })
+      .addCase(unlike.fulfilled, (state, action) => {
+        const posts = state.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            post = action.payload;
+          }
+
+          return post;
+        });
+
+        state.posts = posts;
       });
   },
 });
