@@ -47,6 +47,14 @@ Server started at port 3004
 Base de datos conectada con éxito
 ```
 
+Note: pay attention to .config file in mongoose project it is important to set your DB configuration as well:
+
+```bash
+module.exports = {
+MONGO_URI: 'mongodb+srv://<name>:<password>@cluster0-tuqrv.mongodb.net/test?retryWrites=true&w=majority'
+}
+```
+
 The next step is to build the react project, so we will run next commands: 
 
 ```bash
