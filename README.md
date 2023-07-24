@@ -1,46 +1,93 @@
-# Getting Started with Create React App and Redux
+# React social media project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+In this project we wil use React and React context to build a simple news SPA connected to a mongoDB API which repo is allocated in this URL:
+https://github.com/dondifer/mongoosee-init
 
-## Available Scripts
+## How to start
 
-In the project directory, you can run:
+First of all we have to clone the repo in our local
 
-### `npm start`
+```bash
+https://github.com/dondifer/react-social-media.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone https://github.com/dondifer/mongoosee-init.git
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+Install all neccesary dependencies with npm in both projects, also we have to init mongoose project to be able to have the API working:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+  cd mongoosee-init
+  npm install
+```
 
-### `npm run build`
+After installation we will connect with mongo database using next command:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In console we should see:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+$ npm start
 
-### `npm run eject`
+> mongoosee-init@1.0.0 start
+> nodemon index.js
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[nodemon] 2.0.22
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node index.js`
+Server started at port 3004
+Base de datos conectada con éxito
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Note: pay attention to .config file in mongoose project it is important to set your DB configuration as well:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+module.exports = {
+MONGO_URI: 'mongodb+srv://<name>:<password>@cluster0-tuqrv.mongodb.net/test?retryWrites=true&w=majority'
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The next step is to build the react project, so we will run next commands:
 
-## Learn More
+```bash
+  cd react-social-media
+  npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After install:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  npm start
+```
+
+If all is correctly installed we could access to the project in next URL:
+
+```bash
+  http://localhost:3000/
+```
+
+## Authors
+
+- [@dondifer](https://www.github.com/dondifer)
+
+## Badges
+
+![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
+
+![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+
+![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white)
+
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
