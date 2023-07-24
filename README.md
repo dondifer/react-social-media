@@ -1,37 +1,37 @@
-
 # React social media project
 
 In this project we wil use React and React context to build a simple news SPA connected to a mongoDB API which repo is allocated in this URL:
 https://github.com/dondifer/mongoosee-init
 
-
 ## How to start
-First of all we have to clone the repo in our local
 
+First of all we have to clone the repo in our local
 
 ```bash
 https://github.com/dondifer/react-social-media.git
- ```
+```
 
 ```bash
 git clone https://github.com/dondifer/mongoosee-init.git
- ```
-
-
+```
 
 ## Installation
 
 Install all neccesary dependencies with npm in both projects, also we have to init mongoose project to be able to have the API working:
 
 ```bash
-  cd mongoosee-init   
+  cd mongoosee-init
   npm install
 ```
+
 After installation we will connect with mongo database using next command:
+
 ```bash
   npm start
 ```
+
 In console we should see:
+
 ```bash
 $ npm start
 
@@ -55,15 +55,14 @@ MONGO_URI: 'mongodb+srv://<name>:<password>@cluster0-tuqrv.mongodb.net/test?retr
 }
 ```
 
-The next step is to build the react project, so we will run next commands: 
+The next step is to build the react project, so we will run next commands:
 
 ```bash
   cd react-social-media
-  cd redux-project  
   npm install
 ```
 
-After install: 
+After install:
 
 ```bash
   npm start
@@ -75,12 +74,9 @@ If all is correctly installed we could access to the project in next URL:
   http://localhost:3000/
 ```
 
-
-    
 ## Authors
 
 - [@dondifer](https://www.github.com/dondifer)
-
 
 ## Badges
 
@@ -95,4 +91,3 @@ If all is correctly installed we could access to the project in next URL:
 ![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white)
 
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
-
