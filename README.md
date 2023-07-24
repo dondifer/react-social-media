@@ -1,7 +1,7 @@
 
 # React social media project
 
-In this project we wil use React and React context to build a simple news SPA connected to a mongoDB API allocated in this URL:
+In this project we wil use React and React context to build a simple news SPA connected to a mongoDB API which repo is allocated in this URL:
 https://github.com/dondifer/mongoosee-init
 
 
