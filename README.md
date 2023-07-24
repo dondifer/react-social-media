@@ -74,6 +74,10 @@ If all is correctly installed we could access to the project in next URL:
   http://localhost:3000/
 ```
 
+```bash
+FRNT DEPLOYED IN: https://react-social-media-1i57.vercel.app/
+```
+
 ## Authors
 
 - [@dondifer](https://www.github.com/dondifer)
