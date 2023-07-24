@@ -66,7 +66,28 @@ const ShowModal = (data) => {
       ) : (
         <>
           <h2>{post && post?.title}</h2>
-          <p>{post && post?.description}</p>
+          <p>
+            <strong>Description:</strong> {post && post?.description}
+          </p>
+          <p>
+            <strong>Comments:</strong>
+            <div className="comment-list">
+              {post &&
+                post.comments.map((el, index) => {
+                  if (el.comment) {
+                    return (
+                      <div>
+                        <p className="no-margin">
+                          User <strong>{el.userId}</strong> commented:
+                        </p>
+                        <p className="no-margin">{el.comment}</p>
+                        <p></p>
+                      </div>
+                    );
+                  }
+                })}
+            </div>
+          </p>
           <Button type="secondary" onClick={() => close()}>
             Close
           </Button>

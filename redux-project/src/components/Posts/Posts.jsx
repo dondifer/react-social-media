@@ -168,9 +168,6 @@ const Posts = ({ posts, userId, isDash }) => {
                 >
                   Comment
                 </Button>
-                <Button htmlType="button" onClick={onReset}>
-                  Reset
-                </Button>
               </Form.Item>
             </Form>
           </Card>
